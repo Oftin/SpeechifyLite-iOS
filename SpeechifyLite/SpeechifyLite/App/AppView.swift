@@ -13,12 +13,7 @@ struct AppView: View {
 
     var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
-            VStack {
-                Image(systemName: "books.vertical.fill")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello in Speechify Lite!")
-            }
+            LibraryView(store: self.store.scope(state: \.library, action: { .library($0) }))
         }
     }
 }

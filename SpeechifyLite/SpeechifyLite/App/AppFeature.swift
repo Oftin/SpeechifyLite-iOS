@@ -9,15 +9,16 @@ import ComposableArchitecture
 
 struct AppFeature: Reducer {
     struct State: Equatable {
-
+        var library: LibraryFeature.State = .init()
     }
 
     enum Action {
-
+        case library(LibraryFeature.Action)
     }
 
-    func reduce(into state: inout State, action: Action) -> Effect<Action> {
-
-        return .none
+    var body: some ReducerOf<Self> {
+        Scope(state: \.library, action: /Action.library) {
+            LibraryFeature()
+        }
     }
 }
